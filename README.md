@@ -1,4 +1,6 @@
-# Creation of REST API with SpringBoot and Kotlin
+# REST API with SpringBoot and Kotlin
+
+Modified to complete the [Street fighter Kata](https://www.codewars.com/kata/58583922c1d5b415b00000ff/train/java)
 
 Source code shows REST API creation with Springboot and Kotlin.
 
