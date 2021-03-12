@@ -5,7 +5,7 @@ class Directions(private val up: Position = Position(-1, 0),
                  private val left: Position = Position(0, -1),
                  private val right: Position = Position(0, 1)
 ) {
-    fun getDirection(move: String): Position {
+    public fun getDirection(move: String): Position {
         when (move) {
             "up" ->
                 return this.up

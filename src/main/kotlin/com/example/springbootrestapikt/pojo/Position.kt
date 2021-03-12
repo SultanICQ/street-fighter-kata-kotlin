@@ -1,6 +1,6 @@
 package com.example.springbootrestapikt.pojo
 
-class Position(private val vertical: Int, private val horizontal: Int) {
+class Position(public val vertical: Int, public val horizontal: Int) {
     fun addVertically(number: Int): Position {
         return Position(this.vertical + number, this.horizontal)
     }
