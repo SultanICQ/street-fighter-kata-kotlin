@@ -9,12 +9,21 @@ object Solution {
             return arrayOf()
         }
 
+        val grid = Grid( fighters, Position(position[0], position[1]) )
+        val result2 = moves.fold(emptyArray(), { acc: Array<String>, move: String ->
+            acc + checkFighter(nextPosition(move))
+        })
+
         currentPos = Position(position[0], position[1])
         this.fighters = fighters
 
         val result = moves.fold(emptyArray(), { acc: Array<String>, move: String ->
             acc + checkFighter(nextPosition(move))
         })
+
+        if ( result.equals(result2) ) {
+            return result2
+        }
 
         return result
     }
