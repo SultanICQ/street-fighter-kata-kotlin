@@ -10,6 +10,8 @@ object Solution {
         }
 
         val grid = Grid( fighters, Position(position[0], position[1]) )
+        grid.move()
+
         val result2 = moves.fold(emptyArray(), { acc: Array<String>, move: String ->
             acc + checkFighter(nextPosition(move))
         })
