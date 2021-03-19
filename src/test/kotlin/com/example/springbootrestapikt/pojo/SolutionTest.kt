@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Test
 
 
 class SolutionTest {
-    var fighters = arrayOf(arrayOf("", "Ryu", "E.Honda", "Blanka", "Guile", ""), arrayOf("Balrog", "Ken", "Chun Li", "Zangief", "Dhalsim", "Sagat"), arrayOf("Vega", "T.Hawk", "Fei Long", "Deejay", "Cammy", "M.Bison"))
+    var fighters = arrayOf(
+            arrayOf("", "Ryu", "E.Honda", "Blanka", "Guile", ""),
+            arrayOf("Balrog", "Ken", "Chun Li", "Zangief", "Dhalsim", "Sagat"),
+            arrayOf("Vega", "T.Hawk", "Fei Long", "Deejay", "Cammy", "M.Bison"))
 
     @Test
     fun shouldWorkWithNoMoves() {

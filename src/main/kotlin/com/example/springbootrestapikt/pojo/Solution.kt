@@ -26,9 +26,16 @@ object Solution {
         if (tmp.horizontal < 0) {
             tmp = Position(tmp.vertical, fighters[tmp.vertical].size - 1)
         }
-        if (tmp.horizontal >= fighters[tmp.vertical].size) {
+        if (tmp.vertical< fighters.size && tmp.horizontal >= fighters[tmp.vertical].size) {
             tmp = Position(tmp.vertical, 0)
         }
+
+        if (tmp.vertical < 0 ) { tmp = currentPos; }
+        if (tmp.vertical >= fighters.size ) { tmp = currentPos; }
+        if (pos.vertical!=0 && checkFighter(tmp) == "" ) {
+            tmp = currentPos
+        }
+
         currentPos = tmp
 
         if (checkFighter(currentPos) == "") {
