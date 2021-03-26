@@ -8,4 +8,8 @@ class Position( val vertical: Int,  val horizontal: Int) {
     fun addHorizontally(number: Int): Position {
         return Position (this.vertical, this.horizontal+number)
     }
+
+    fun isEqual(otherPosition: Position): Boolean {
+        return this.vertical == otherPosition.vertical && this.horizontal == otherPosition.horizontal
+    }
 }
