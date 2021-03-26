@@ -4,13 +4,10 @@ object Solution {
     private var currentPos: Position = Position(0, 0)
     private var fighters: Array<Array<String>> = emptyArray()
 
-    fun superStreetFighterize(fighters: Array<Array<String>>, position: IntArray, moves: Array<String>): Array<String>? {
+    fun superStreetFighterizeOld(fighters: Array<Array<String>>, position: IntArray, moves: Array<String>): Array<String>? {
         if (moves.size == 0) {
             return arrayOf()
         }
-
-        val grid = Grid( fighters, Position(position[0], position[1]) )
-        grid.move()
 
         val result2 = moves.fold(emptyArray(), { acc: Array<String>, move: String ->
             acc + checkFighter(nextPosition(move))
@@ -28,6 +25,25 @@ object Solution {
         }
 
         return result
+    }
+
+    fun superStreetFighterize(fighters: Array<Array<String>>, position: IntArray, moves: Array<String>): Array<String> {
+        if (moves.size == 0) {
+            return arrayOf()
+        }
+
+        val grid = Grid(fighters, Position(position[0], position[1]) )
+        val nextCell = grid.move(Directions().getDirection("down"))
+
+        currentPos = Position(position[0], position[1])
+        this.fighters = fighters
+
+
+        val result = moves.fold(Grid(), { acc: Grid, move: String ->
+            grid.move(Directions().getDirection(move))
+        })
+
+        return result.ge
     }
 
     fun nextPosition(move: String): Position {
