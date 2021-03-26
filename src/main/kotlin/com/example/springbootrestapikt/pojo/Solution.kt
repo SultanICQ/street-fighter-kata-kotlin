@@ -27,9 +27,9 @@ object Solution {
         return result
     }
 
-    fun superStreetFighterize(fighters: Array<Array<String>>, position: IntArray, moves: Array<String>): Array<String> {
+    fun superStreetFighterize(fighters: Array<Array<String>>, position: IntArray, moves: Array<String>): List<String> {
         if (moves.size == 0) {
-            return arrayOf()
+            return listOf()
         }
 
         val grid = Grid(fighters, Position(position[0], position[1]) )
@@ -39,11 +39,11 @@ object Solution {
         this.fighters = fighters
 
 
-        val result = moves.fold(Grid(), { acc: Grid, move: String ->
+        val result = moves.fold(grid, { acc: Grid, move: String ->
             grid.move(Directions().getDirection(move))
         })
 
-        return result.ge
+        return result.getResult()
     }
 
     fun nextPosition(move: String): Position {
