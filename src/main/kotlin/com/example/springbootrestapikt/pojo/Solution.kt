@@ -4,7 +4,7 @@ object Solution {
     private var currentPos: Position = Position(0, 0)
     private var fighters: Array<Array<String>> = emptyArray()
 
-    fun superStreetFighterizeOld(fighters: Array<Array<String>>, position: IntArray, moves: Array<String>): Array<String>? {
+    fun superStreetFighterizeOLD(fighters: Array<Array<String>>, position: IntArray, moves: Array<String>): Array<String>? {
         if (moves.size == 0) {
             return arrayOf()
         }
@@ -27,13 +27,12 @@ object Solution {
         return result
     }
 
-    fun superStreetFighterize(fighters: Array<Array<String>>, position: IntArray, moves: Array<String>): List<String> {
+    fun superStreetFighterize(fighters: Array<Array<String>>, position: IntArray, moves: Array<String>): Array<String> {
         if (moves.size == 0) {
-            return listOf()
+            return arrayOf()
         }
 
-        val grid = Grid(fighters, Position(position[0], position[1]) )
-        val nextCell = grid.move(Directions().getDirection("down"))
+        val grid = Grid.create(fighters, Position(position[0], position[1]) )
 
         currentPos = Position(position[0], position[1])
         this.fighters = fighters
@@ -43,7 +42,7 @@ object Solution {
             grid.move(Directions().getDirection(move))
         })
 
-        return result.getResult()
+        return result.getResult().toTypedArray()
     }
 
     fun nextPosition(move: String): Position {

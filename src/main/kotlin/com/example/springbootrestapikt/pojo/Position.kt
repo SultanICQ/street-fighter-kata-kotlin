@@ -12,4 +12,9 @@ class Position( val vertical: Int,  val horizontal: Int) {
     fun isEqual(otherPosition: Position): Boolean {
         return this.vertical == otherPosition.vertical && this.horizontal == otherPosition.horizontal
     }
+
+    fun sum(otherPosition: Position): Position {
+        return Position(this.vertical + otherPosition.vertical, this.horizontal + otherPosition.horizontal)
+    }
+
 }
