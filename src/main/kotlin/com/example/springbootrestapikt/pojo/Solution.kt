@@ -15,7 +15,7 @@ object Solution {
         this.fighters = fighters
 
         val result = moves.fold(grid, { acc: Grid, move: String ->
-            acc.move(Directions().getDirection(move))
+            acc.move(move.asMovement())
         })
 
         return result.getResult().toTypedArray()
