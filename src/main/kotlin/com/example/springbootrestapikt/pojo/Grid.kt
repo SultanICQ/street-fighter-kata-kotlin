@@ -6,18 +6,46 @@ import kotlin.collections.ArrayList
 data class Grid(val cells: List<Cell>, val currentCell: Cell, val history: List<Cell> = emptyList()) {
 
     fun move(move: Position): Grid {
-        val newPosition = currentCell.position.sum(move)
-        //val newCell = getNextCell(newPosition, move)
-        return Optional.ofNullable(cells.find { cell: Cell -> newPosition.isEqual(cell.position) })
-                .map { copy( currentCell = it, history = history + listOf(it)) }
-                .orElseGet{ copy(history = history + currentCell) }
-    }
+        var newPosition = currentCell.position.sum(move)
+        var finalCell = currentCell
+        if(move.vertical == -1){
+            var newCells = cells.filter { cell: Cell -> cell.position.horizontal == newPosition.horizontal }
+            var upCells = newCells.filter { cell: Cell -> cell.position.vertical < currentCell.position.vertical }
+            if(upCells.isEmpty() || upCells.last().fighter.name.isEmpty()){
+                finalCell = currentCell
+            }else{
+                finalCell = upCells.last()
+            }
+        }
+        else if(move.vertical == 1){
+            var newCells = cells.filter { cell: Cell -> cell.position.horizontal == newPosition.horizontal }
+            var downCells = newCells.filter { cell: Cell -> cell.position.vertical > currentCell.position.vertical }
+            if(downCells.isEmpty() || downCells.last().fighter.name.isEmpty()){
+                finalCell = currentCell
+            }else{
+                finalCell = downCells.last()
+            }
+        }
+        else if(move.horizontal == -1){
+            var newCells = cells.filter { cell: Cell -> cell.position.vertical == newPosition.vertical }
+            var leftCells = newCells.filter { cell: Cell -> cell.position.horizontal < currentCell.position.horizontal && cell.fighter.name != ""}
+            var rightCells = newCells.filter { cell: Cell -> cell.position.horizontal > currentCell.position.horizontal && cell.fighter.name != ""}
+            var newCellsDos = rightCells + leftCells
+            finalCell = newCellsDos.reversed().first()
 
-//    private fun getNextCell(newPosition: Position, move: Position): Cell {
-//        val newCell = cells.find { cell: Cell -> newPosition.isEqual(cell.position) && cell.fighter.name != "" }
-//                ?: getNextCell(newPosition.sum(move))
-//        return newCell
-//    }
+        }
+        else if(move.horizontal == 1){
+            var newCells = cells.filter { cell: Cell -> cell.position.vertical == newPosition.vertical }
+            var leftCells = newCells.filter { cell: Cell -> cell.position.horizontal < currentCell.position.horizontal && cell.fighter.name != ""}
+            var rightCells = newCells.filter { cell: Cell -> cell.position.horizontal > currentCell.position.horizontal && cell.fighter.name != ""}
+            var newCellsDos = rightCells + leftCells
+            finalCell = newCellsDos.first()
+
+
+        }
+
+        return copy( history = history + finalCell, currentCell = finalCell)
+    }
 
     fun getResult(): List<String> {
         return history.map { cell: Cell -> cell.fighter.name }

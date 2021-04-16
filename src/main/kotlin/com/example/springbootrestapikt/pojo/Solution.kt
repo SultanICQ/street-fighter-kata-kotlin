@@ -39,7 +39,7 @@ object Solution {
 
 
         val result = moves.fold(grid, { acc: Grid, move: String ->
-            grid.move(Directions().getDirection(move))
+            acc.move(Directions().getDirection(move))
         })
 
         return result.getResult().toTypedArray()
