@@ -9,7 +9,7 @@ data class Grid(val cells: List<Cell>, val currentCell: Cell, val history: List<
         var newPosition = currentCell.position.sum(move)
         var finalCell = currentCell
         if(move.vertical == -1){
-            var newCells = cells.filter { cell: Cell -> cell.position.horizontal == newPosition.horizontal }
+            var newCells = cells.filter { cell: Cell -> cell.position.horizontal == currentCell.position.horizontal }
             var upCells = newCells.filter { cell: Cell -> cell.position.vertical < currentCell.position.vertical }
             if(upCells.isEmpty() || upCells.last().fighter.name.isEmpty()){
                 finalCell = currentCell
@@ -18,16 +18,16 @@ data class Grid(val cells: List<Cell>, val currentCell: Cell, val history: List<
             }
         }
         else if(move.vertical == 1){
-            var newCells = cells.filter { cell: Cell -> cell.position.horizontal == newPosition.horizontal }
+            var newCells = cells.filter { cell: Cell -> cell.position.horizontal == currentCell.position.horizontal }
             var downCells = newCells.filter { cell: Cell -> cell.position.vertical > currentCell.position.vertical }
-            if(downCells.isEmpty() || downCells.last().fighter.name.isEmpty()){
+            if(downCells.isEmpty() || downCells.first().fighter.name.isEmpty()){
                 finalCell = currentCell
             }else{
-                finalCell = downCells.last()
+                finalCell = downCells.first()
             }
         }
         else if(move.horizontal == -1){
-            var newCells = cells.filter { cell: Cell -> cell.position.vertical == newPosition.vertical }
+            var newCells = cells.filter { cell: Cell -> cell.position.vertical == currentCell.position.vertical }
             var leftCells = newCells.filter { cell: Cell -> cell.position.horizontal < currentCell.position.horizontal && cell.fighter.name != ""}
             var rightCells = newCells.filter { cell: Cell -> cell.position.horizontal > currentCell.position.horizontal && cell.fighter.name != ""}
             var newCellsDos = rightCells + leftCells
@@ -35,7 +35,7 @@ data class Grid(val cells: List<Cell>, val currentCell: Cell, val history: List<
 
         }
         else if(move.horizontal == 1){
-            var newCells = cells.filter { cell: Cell -> cell.position.vertical == newPosition.vertical }
+            var newCells = cells.filter { cell: Cell -> cell.position.vertical == currentCell.position.vertical }
             var leftCells = newCells.filter { cell: Cell -> cell.position.horizontal < currentCell.position.horizontal && cell.fighter.name != ""}
             var rightCells = newCells.filter { cell: Cell -> cell.position.horizontal > currentCell.position.horizontal && cell.fighter.name != ""}
             var newCellsDos = rightCells + leftCells
