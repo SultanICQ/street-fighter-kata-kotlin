@@ -1,19 +1,21 @@
 package com.example.springbootrestapikt.fight
 
+import com.example.springbootrestapikt.fight.stats.*
+
 class InvalidFighter: RuntimeException("Invalid fighter")
 
-data class Fighter(private val str: Stat, private val dex: Stat, private val luck: Stat, private val vit: Stat, private val def: Stat) {
+data class Fighter(private val str: Strength, private val dex: Stat, private val luck: Stat, private val vit: Stat, private val def: Stat) {
     companion object {
         fun createTank() {
-            Fighter(Stat(5), Stat(2), Stat(3), Stat(10), Stat(10))
+            Fighter(Strength(5), Dexterity(2), Luck(3), Vitality(10), Defense(10))
         }
 
         fun createAssassin() {
-            Fighter(Stat(9), Stat(9), Stat(9), Stat(2), Stat(1))
+            Fighter(Strength(9), Dexterity(9), Luck(9), Vitality(2), Defense(1))
         }
 
         fun createKnight() {
-            Fighter(Stat(6), Stat(6), Stat(6), Stat(6), Stat(6))
+            Fighter(Strength(6), Dexterity(6), Luck(6), Vitality(6), Defense(6))
         }
     }
 
@@ -25,7 +27,5 @@ data class Fighter(private val str: Stat, private val dex: Stat, private val luc
 
     fun attack (stat: Int): Boolean { return stat in 1..10 }
 
-//    fun dices (min: Int, max: Int): Int {
-//        val randomValues = List(10) { Random.nextInt(min, max) }
-//    }
+
 }

@@ -9,6 +9,7 @@ class StatTest {
     fun shouldWorkWithStateValueBetween1and10() {
         Stat(5)
     }
+
     @Test
     fun shouldNotWorkWithStateValueDifferentOf1to10Range() {
         assertThrows<InvalidStat> { Stat(0) }
