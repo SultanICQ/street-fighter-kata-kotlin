@@ -1,14 +1,15 @@
 package com.example.springbootrestapikt.fight
 
 import com.example.springbootrestapikt.fight.stats.*
+import java.util.*
+import kotlin.random.Random
 
 class InvalidFighter: RuntimeException("Invalid fighter")
 
 data class Fighter(private val str: Strength, private val dex: Dexterity, private val luck: Luck, private val vit: Vitality, private val def: Defense) {
     companion object {
-        fun new(str: Int, dex: Int, lck: Int, vit: Int, def: Int) {
-            Fighter(Strength.new(str), Dexterity.new(dex), Luck.new(lck), Vitality.new(vit), Defense.new(def))
-        }
+        fun new(str: Int, dex: Int, lck: Int, vit: Int, def: Int) = Fighter(Strength.new(str), Dexterity.new(dex), Luck.new(lck), Vitality.new(vit), Defense.new(def))
+
         fun createTank() = new(5,2,3,10,10)
 
         fun createAssassin() = new(9,9,9,2,1)
@@ -23,7 +24,7 @@ data class Fighter(private val str: Strength, private val dex: Dexterity, privat
         }
     }
 
-    fun attack (stat: Int): Boolean { return stat in 1..10 }
+    fun attack (dice: IDice): Int { return dice.roll() * str.value }
 
 
 }

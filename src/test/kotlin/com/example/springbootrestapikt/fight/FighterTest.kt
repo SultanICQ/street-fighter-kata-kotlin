@@ -18,7 +18,7 @@ class FighterTest {
 
     @Test
     fun shouldGetStrengthBetween5and25 () {
-        assertThrows<InvalidFighter> { Fighter.new(9,9,9,2,10) }
+        Fighter.createTank()
     }
 
 
