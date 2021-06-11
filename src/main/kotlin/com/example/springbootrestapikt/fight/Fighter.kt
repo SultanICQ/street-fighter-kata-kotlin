@@ -24,10 +24,9 @@ data class Fighter(private val str: Strength, private val dex: Dexterity, privat
         }
     }
 
-    fun attack (attackDice: IDice, criticDice: IDice): Int {
-        val dmg = attackDice.roll() * str.value
-        val criticChance = criticDice.roll()
-        if(criticChance < luck.value*5) return (dmg * 1.5).toInt()
+    fun attack (): Int {
+        val dmg = str.rollDamage()
+        if(luck.rollCritic()) return (dmg * 1.5).toInt()
         return dmg
     }
 
