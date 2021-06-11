@@ -4,19 +4,17 @@ import com.example.springbootrestapikt.fight.stats.*
 
 class InvalidFighter: RuntimeException("Invalid fighter")
 
-data class Fighter(private val str: Strength, private val dex: Stat, private val luck: Stat, private val vit: Stat, private val def: Stat) {
+data class Fighter(private val str: Strength, private val dex: Dexterity, private val luck: Luck, private val vit: Vitality, private val def: Defense) {
     companion object {
-        fun createTank() {
-            Fighter(Strength(5), Dexterity(2), Luck(3), Vitality(10), Defense(10))
+        fun new(str: Int, dex: Int, lck: Int, vit: Int, def: Int) {
+            Fighter(Strength.new(str), Dexterity.new(dex), Luck.new(lck), Vitality.new(vit), Defense.new(def))
         }
+        fun createTank() = new(5,2,3,10,10)
 
-        fun createAssassin() {
-            Fighter(Strength(9), Dexterity(9), Luck(9), Vitality(2), Defense(1))
-        }
+        fun createAssassin() = new(9,9,9,2,1)
 
-        fun createKnight() {
-            Fighter(Strength(6), Dexterity(6), Luck(6), Vitality(6), Defense(6))
-        }
+        fun createKnight() = new(6,6,6,6,6)
+
     }
 
     init {

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class StrengthTest {
     @Test
     fun shouldWorkWithStateValueBetween1and10() {
-        Strength(5)
+        Strength.new(5)
     }
 }
 

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 class DefenseTest {
     @Test
     fun shouldWorkWithStateValueBetween1and10() {
-        Defense(5)
+        Defense.new(5)
     }
 }
 

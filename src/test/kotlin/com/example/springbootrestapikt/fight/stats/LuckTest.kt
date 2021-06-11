@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class LuckTest {
     @Test
     fun shouldWorkWithStateValueBetween1and10() {
-        Luck(5)
+        Luck.new(5)
     }
 }
 

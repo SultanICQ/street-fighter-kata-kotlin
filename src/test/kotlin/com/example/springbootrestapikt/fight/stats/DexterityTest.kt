@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class DexterityTest {
     @Test
     fun shouldWorkWithStateValueBetween1and10() {
-        Dexterity(5)
+        Dexterity.new(5)
     }
 }
 
