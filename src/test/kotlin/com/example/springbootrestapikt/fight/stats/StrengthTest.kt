@@ -1,16 +1,11 @@
 package com.example.springbootrestapikt.fight.stats
 
-import com.example.springbootrestapikt.fight.Dice
 import com.example.springbootrestapikt.fight.Fighter
 import com.example.springbootrestapikt.fight.IDice
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
-import org.mockito.MockitoAnnotations
 
 class StrengthTest {
 
@@ -22,11 +17,13 @@ class StrengthTest {
 
     @Test
     fun shouldReturnValidAttackValue() {
-        val diceMock: IDice = mock(IDice::class.java)
-        `when`(diceMock.roll()).thenReturn(5)
-        assertEquals(diceMock.roll(), 5)
-        assertEquals(Fighter.createAssassin().attack(diceMock), 45)
-        assertEquals(Fighter.createKnight().attack(diceMock), 30)
+        val attackDice: IDice = mock(IDice::class.java)
+        val criticDice: IDice = mock(IDice::class.java)
+        `when`(attackDice.roll()).thenReturn(5)
+        `when`(criticDice.roll()).thenReturn(35)
+        assertEquals(attackDice.roll(), 5)
+        assertEquals(Fighter.createAssassin().attack(attackDice, criticDice), (45 * 1.5).toInt())
+        assertEquals(Fighter.createKnight().attack(attackDice, criticDice), 30)
     }
 }
 
