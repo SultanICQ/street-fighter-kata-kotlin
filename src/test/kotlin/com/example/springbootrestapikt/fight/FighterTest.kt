@@ -36,8 +36,6 @@ class FighterTest {
         val defender = Fighter(Strength.new(9), Dexterity(Stat(9), evasionDice), Luck.new(1), Vitality.new(2), Defense.new(9), Health(200))
         val newDefender = attacker.attack(defender)
         Assertions.assertEquals(newDefender.health.value, 200)
-
-        //assertEquals(Fighter.createKnight().attack(), 30)
     }
 
     @Test
@@ -54,8 +52,6 @@ class FighterTest {
         val defender = Fighter(Strength.new(9), Dexterity(Stat(9), evasionDice), Luck.new(1), Vitality.new(2), Defense(Stat(9), defenseDice), Health(200))
         val newDefender = attacker.attack(defender)
         Assertions.assertEquals(newDefender.health.value, 178)
-
-        //assertEquals(Fighter.createKnight().attack(), 30)
     }
 
 

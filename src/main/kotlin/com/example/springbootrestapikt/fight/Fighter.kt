@@ -10,7 +10,7 @@ data class Fighter(private val str: Strength, private val dex: Dexterity, privat
     companion object {
         fun new(str: Int, dex: Int, lck: Int, vit: Int, def: Int) : Fighter {
             val vitality = Vitality.new(vit)
-            return Fighter(Strength.new(str), Dexterity.new(dex), Luck.new(lck), vitality, Defense.new(def), Health(vitality.maxHealth()))
+            return Fighter(Strength.new(str), Dexterity.new(dex), Luck.new(lck), vitality, Defense.new(def), vitality.maxHealth())
         }
 
         fun createTank() = new(5,2,3,10,10)
@@ -39,7 +39,7 @@ data class Fighter(private val str: Strength, private val dex: Dexterity, privat
         val defense = def.rollDefense()
         if (defense >= damage) return this
 
-        return copy(health = Health(health.value - (damage - defense)))
+        return copy(health = health.reduce(damage - defense))
     }
 
 
