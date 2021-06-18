@@ -6,9 +6,12 @@ import kotlin.random.Random
 
 class InvalidFighter: RuntimeException("Invalid fighter")
 
-data class Fighter(private val str: Strength, private val dex: Dexterity, private val luck: Luck, private val vit: Vitality, private val def: Defense) {
+data class Fighter(private val str: Strength, private val dex: Dexterity, private val luck: Luck, private val vit: Vitality, private val def: Defense, val health: Health) {
     companion object {
-        fun new(str: Int, dex: Int, lck: Int, vit: Int, def: Int) = Fighter(Strength.new(str), Dexterity.new(dex), Luck.new(lck), Vitality.new(vit), Defense.new(def))
+        fun new(str: Int, dex: Int, lck: Int, vit: Int, def: Int) : Fighter {
+            val vitality = Vitality.new(vit)
+            return Fighter(Strength.new(str), Dexterity.new(dex), Luck.new(lck), vitality, Defense.new(def), Health(vitality.maxHealth()))
+        }
 
         fun createTank() = new(5,2,3,10,10)
 
@@ -17,28 +20,26 @@ data class Fighter(private val str: Strength, private val dex: Dexterity, privat
         fun createKnight() = new(6,6,6,6,6)
 
     }
-    private val health : Health
 
     init {
         if (str.value + dex.value + luck.value + vit.value + def.value != 30) {
             throw InvalidFighter()
         }
-        health = Health(vit.maxHealth())
     }
 
-    fun attack (target: Fighter): Int {
+    fun attack (target: Fighter): Fighter {
         val dmg = str.rollDamage()
         if (luck.rollCritic()) return target.defense((dmg * 1.5).toInt())
         return target.defense(dmg)
     }
 
-    private fun defense (damage : Int): Int {
-        if (dex.rollEvasion()) return 0
+    private fun defense (damage : Int): Fighter {
+        if (dex.rollEvasion()) return this
 
-        val def = def.rollDefense()
-        if (def >= damage) return 0
+        val defense = def.rollDefense()
+        if (defense >= damage) return this
 
-        return health.value - (damage - def)
+        return copy(health = Health(health.value - (damage - defense)))
     }
 
 

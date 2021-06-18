@@ -32,9 +32,10 @@ class FighterTest {
         Mockito.`when`(criticDice.roll()).thenReturn(35)
         Mockito.`when`(evasionDice.roll()).thenReturn(1)
         Assertions.assertEquals(attackDice.roll(), 5)
-        val attacker = Fighter(Strength(Stat(9), attackDice), Dexterity.new(9), Luck(Stat(9), criticDice), Vitality.new(2), Defense.new(1))
-        val defender = Fighter(Strength.new(9), Dexterity(Stat(9), evasionDice), Luck.new(1), Vitality.new(2), Defense.new(9))
-        Assertions.assertEquals(attacker.attack(defender), 0)
+        val attacker = Fighter(Strength(Stat(9), attackDice), Dexterity.new(9), Luck(Stat(9), criticDice), Vitality.new(2), Defense.new(1), Health(200))
+        val defender = Fighter(Strength.new(9), Dexterity(Stat(9), evasionDice), Luck.new(1), Vitality.new(2), Defense.new(9), Health(200))
+        val newDefender = attacker.attack(defender)
+        Assertions.assertEquals(newDefender.health.value, 200)
 
         //assertEquals(Fighter.createKnight().attack(), 30)
     }
@@ -49,9 +50,10 @@ class FighterTest {
         Mockito.`when`(criticDice.roll()).thenReturn(35)
         Mockito.`when`(evasionDice.roll()).thenReturn(100)
         Mockito.`when`(defenseDice.roll()).thenReturn(5)
-        val attacker = Fighter(Strength(Stat(9), attackDice), Dexterity.new(9), Luck(Stat(9), criticDice), Vitality.new(2), Defense.new(1))
-        val defender = Fighter(Strength.new(9), Dexterity(Stat(9), evasionDice), Luck.new(1), Vitality.new(2), Defense(Stat(9), defenseDice))
-        Assertions.assertEquals(attacker.attack(defender), 178)
+        val attacker = Fighter(Strength(Stat(9), attackDice), Dexterity.new(9), Luck(Stat(9), criticDice), Vitality.new(2), Defense.new(1), Health(200))
+        val defender = Fighter(Strength.new(9), Dexterity(Stat(9), evasionDice), Luck.new(1), Vitality.new(2), Defense(Stat(9), defenseDice), Health(200))
+        val newDefender = attacker.attack(defender)
+        Assertions.assertEquals(newDefender.health.value, 178)
 
         //assertEquals(Fighter.createKnight().attack(), 30)
     }
