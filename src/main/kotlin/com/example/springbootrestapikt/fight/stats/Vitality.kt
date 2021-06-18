@@ -7,4 +7,5 @@ data class Vitality(override val stat: Stat) : Trait {
     companion object {
         fun new (value: Int) = Vitality(Stat(value))
     }
+    fun maxHealth () = stat.value * 100
 }

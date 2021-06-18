@@ -9,4 +9,5 @@ data class Dexterity(override val stat: Stat, val dice: IDice) : Trait {
     companion object {
         fun new (value: Int) = Dexterity(Stat(value), Dice(100))
     }
+    fun rollEvasion () = dice.roll() < 5 * stat.value
 }

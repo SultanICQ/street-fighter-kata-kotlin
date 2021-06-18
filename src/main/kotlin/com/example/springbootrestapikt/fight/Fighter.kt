@@ -17,18 +17,32 @@ data class Fighter(private val str: Strength, private val dex: Dexterity, privat
         fun createKnight() = new(6,6,6,6,6)
 
     }
+    private val health : Health
 
     init {
         if (str.value + dex.value + luck.value + vit.value + def.value != 30) {
             throw InvalidFighter()
         }
+        health = Health(vit.maxHealth())
     }
 
-    fun attack (): Int {
+    fun attack (target: Fighter): Int {
         val dmg = str.rollDamage()
-        if(luck.rollCritic()) return (dmg * 1.5).toInt()
-        return dmg
+        if (luck.rollCritic()) return target.defense((dmg * 1.5).toInt())
+        return target.defense(dmg)
     }
+
+    fun defense (damage : Int): Int {
+        if (!dex.rollEvasion()) {
+            val def = def.rollDefense()
+            if (def >= damage) return 0
+            return health.value - (damage - def)
+        }
+        return 0
+
+    }
+
+
 
 
 }
