@@ -32,14 +32,13 @@ data class Fighter(private val str: Strength, private val dex: Dexterity, privat
         return target.defense(dmg)
     }
 
-    fun defense (damage : Int): Int {
-        if (!dex.rollEvasion()) {
-            val def = def.rollDefense()
-            if (def >= damage) return 0
-            return health.value - (damage - def)
-        }
-        return 0
+    private fun defense (damage : Int): Int {
+        if (dex.rollEvasion()) return 0
 
+        val def = def.rollDefense()
+        if (def >= damage) return 0
+
+        return health.value - (damage - def)
     }
 
 
